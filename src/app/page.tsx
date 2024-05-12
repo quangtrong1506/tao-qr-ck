@@ -1,12 +1,21 @@
 'use client';
 
 import { stringToSlug, to_vietnam_dong } from '@/helper/helpers';
+import { Metadata } from 'next';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Loading from './Components/Loading';
+
+export const metadata: Metadata = {
+    title: 'Tạo mã QR nhận tiền',
+    description: 'Trang chủ - Tạo Mã QR nhận Tiền',
+};
 export default function Home() {
     const router = useRouter();
     const [money, setMoney] = useState<string>('');
     const [content, setContent] = useState<string>('');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const handleClick = () => {
         let num = parseInt(money.replaceAll('.', ''));
         if (Number.isNaN(num) || num < 1000) {
@@ -14,7 +23,7 @@ export default function Home() {
         } else setContent(`Tra TrongSaDoa ${num.toString().slice(0, num.toString().length - 3)} Ty Dong`);
     };
     const handleSubmit = () => {
-        console.log('submit');
+        setIsLoading(true);
         router.push(`/display?money=${money.replaceAll('.', '')}&content=${content}`);
     };
     return (
@@ -96,7 +105,7 @@ export default function Home() {
                         type="submit"
                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
-                        Tạo
+                        {isLoading ? <Loading /> : <>Tạo QR</>}
                     </button>
                 </form>
             </main>
