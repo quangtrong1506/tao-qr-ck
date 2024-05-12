@@ -86,22 +86,3 @@ export const to_vietnam_dong: (money: string) => string = (input: string) => {
     //remove unwanted white space
     return result.join(' ');
 };
-
-// export genQRCodeBase64 = ({
-//     bank = '',
-//     accountName = '',
-//     accountNumber = '',
-//     amount = '',
-//     memo = '',
-//     template = 'qr_only',
-// }) =>{
-//         return await postData(`https://api.vietqr.io/v2/generate`, {
-//             accountNo: accountNumber,
-//             accountName: accountName,
-//             acqId: bank,
-//             addInfo: memo,
-//             amount: amount,
-//             template: template,
-//         });
-//     }
-// }
