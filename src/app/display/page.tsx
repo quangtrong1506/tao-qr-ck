@@ -1,13 +1,13 @@
 'use client';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 // let vietQR = new VietQR({
 //     clientID: process.env.NEXT_PUBLIC_clientID,
 //     apiKey: process.env.NEXT_PUBLIC_apiKey,
 // });
-function DisplayPage() {
+function Display() {
     // const params = useParams<{ money: string; content: string }>();
     const searchParams = useSearchParams();
     const money = searchParams.get('money');
@@ -62,5 +62,12 @@ function DisplayPage() {
         </div>
     );
 }
+const DisplayPage = () => {
+    return (
+        <Suspense>
+            <Display />
+        </Suspense>
+    );
+};
 
 export default DisplayPage;
