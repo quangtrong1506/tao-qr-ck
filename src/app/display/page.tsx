@@ -2,11 +2,11 @@
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { VietQR } from 'vietqr';
-let vietQR = new VietQR({
-    clientID: process.env.NEXT_PUBLIC_clientID,
-    apiKey: process.env.NEXT_PUBLIC_apiKey,
-});
+
+// let vietQR = new VietQR({
+//     clientID: process.env.NEXT_PUBLIC_clientID,
+//     apiKey: process.env.NEXT_PUBLIC_apiKey,
+// });
 function DisplayPage() {
     // const params = useParams<{ money: string; content: string }>();
     const searchParams = useSearchParams();
@@ -14,19 +14,27 @@ function DisplayPage() {
     const content = searchParams.get('content');
     const [img, setImg] = useState<string>('');
     useEffect(() => {
-        vietQR
-            .genQRCodeBase64({
-                bank: '970422',
-                accountName: 'LUONG QUANG TRONG',
-                accountNumber: '0389619050',
-                amount: money,
-                memo: content,
-                template: 'qr_only',
-            })
-            .then((res: any) => {
-                setImg(res.data.data.qrDataURL);
-            })
-            .catch((err: any) => {});
+        const myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+
+        const raw = JSON.stringify({
+            acqId: '970422',
+            accountName: 'LUONG QUANG TRONG',
+            accountNo: '0389619050',
+            amount: money,
+            memo: content,
+            template: 'qr_only',
+        });
+
+        fetch('https://api.vietqr.io/v2/generate', {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow',
+        })
+            .then((response) => response.json())
+            .then((result) => setImg(result.data.qrDataURL))
+            .catch((error) => console.error(error));
 
         return () => {};
     }, [content, money]);
