@@ -1,15 +1,10 @@
 'use client';
 
 import { stringToSlug, to_vietnam_dong } from '@/helper/helpers';
-import { Metadata } from 'next';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Loading from './Components/Loading';
 
-export const metadata: Metadata = {
-    title: 'Tạo mã QR nhận tiền',
-    description: 'Trang chủ - Tạo Mã QR nhận Tiền',
-};
 export default function Home() {
     const router = useRouter();
     const [money, setMoney] = useState<string>('');

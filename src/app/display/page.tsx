@@ -4,19 +4,6 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 import Loading from '../Components/Loading';
 
-export async function generateMetadata({
-    params,
-}: {
-    params: {
-        title?: string;
-        description?: string;
-    };
-}) {
-    return {
-        title: params.title ?? 'Nhận Tiền',
-        description: params.description + 'QR nhận tiền',
-    };
-}
 function Display() {
     // const params = useParams<{ money: string; content: string }>();
     const searchParams = useSearchParams();
@@ -24,12 +11,8 @@ function Display() {
     const content = searchParams.get('content');
     const [img, setImg] = useState<string>('');
     useEffect(() => {
-        generateMetadata({
-            params: {
-                title: `QRCode  ${money}`,
-                description: `QR nhận ${money} đồng`,
-            },
-        });
+        document.title = `QRCode  ${money}`;
+        document.head.append(`QR nhận ${money} đồng`);
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         const raw = JSON.stringify({
