@@ -22,7 +22,7 @@ function Display() {
             accountName: 'LUONG QUANG TRONG',
             accountNo: '0389619050',
             amount: money,
-            memo: content,
+            addInfo: content,
             template: 'qr_only',
         });
 
