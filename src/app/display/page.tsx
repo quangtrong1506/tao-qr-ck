@@ -11,8 +11,7 @@ function Display() {
     const content = searchParams.get('content');
     const [img, setImg] = useState<string>('');
     useEffect(() => {
-        document.title = `QRCode  ${money}`;
-        document.head.append(`QR nhận ${money} đồng`);
+        document.title = `QRCode ${money} đ`;
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         const raw = JSON.stringify({
@@ -37,8 +36,10 @@ function Display() {
         return () => {};
     }, [content, money]);
     return (
-        <div className="w-screen h-screen">
-            <div className="flex h-full justify-center align-middle items-center">{img ? <Image src={img} width={300} height={300} alt="..." /> : <Loading />}</div>
+        <div className="relative w-screen h-screen">
+            <div className=" flex h-full justify-center align-middle items-center">
+                <div className="p-1">{img ? <Image src={img} width={300} height={300} alt="..." /> : <Loading />}</div>
+            </div>
         </div>
     );
 }
