@@ -6,6 +6,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
     title: 'Tạo mã QR nhận tiền',
     description: 'Trang chủ - Tạo Mã QR nhận Tiền',
+    icons: '/images/icon.ico',
 };
 export default function RootLayout({
     children,
@@ -14,9 +15,6 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <head>
-                <link rel="icon" href="/images/favicon.ico" type="image/x-icon" sizes="564x564"></link>
-            </head>
             <body className={inter.className} suppressHydrationWarning={true}>
                 {children}
             </body>
