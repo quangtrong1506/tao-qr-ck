@@ -16,7 +16,7 @@ export default function RootLayout({
     return (
         <html lang="vi">
             <head>
-                <link rel="shortcut icon" href="/images/icon.icon" type="image/x-icon" />
+                <link rel="shortcut icon" href="/images/icon.ico" type="image/x-icon" />
             </head>
             <body className={inter.className} suppressHydrationWarning={true}>
                 {children}
