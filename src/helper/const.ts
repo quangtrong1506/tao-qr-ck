@@ -898,4 +898,37 @@ const LIST_BANK = [
     },
 ] as IBank[];
 
-export { LIST_BANK };
+type BankTypes = {
+    id: string;
+    label: string;
+    value: string;
+    bank_id: number;
+};
+const MY_BANKS: BankTypes[] = [
+    {
+        id: '1',
+        label: 'Ví thần tài',
+        value: '01MMTTT0060708488',
+        bank_id: 47,
+    },
+    {
+        id: '2',
+        label: 'MB bank',
+        value: '0389619050',
+        bank_id: 21,
+    },
+    {
+        id: '3',
+        label: 'VP Bank',
+        value: '0389619050',
+        bank_id: 47,
+    },
+    {
+        id: '4',
+        label: 'TP Bank',
+        value: '0389619050',
+        bank_id: 39,
+    },
+];
+export { LIST_BANK, MY_BANKS };
+export type { BankTypes };
