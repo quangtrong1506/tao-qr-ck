@@ -49,8 +49,6 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
             title: '400',
             description: data.desc,
         };
-    console.log(data);
-
     const previousImages = data.data.qrDataURL || [];
 
     const title = `QR thanh toán tiền cho Quang Trọng`;
