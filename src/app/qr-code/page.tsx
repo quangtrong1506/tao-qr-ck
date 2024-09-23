@@ -1,5 +1,5 @@
 'use client';
-import { IBank, LIST_BANK, MY_BANKS } from '@/helper/const';
+import { LIST_BANK, MY_BANKS } from '@/helper/const';
 import { to_vietnam_dong } from '@/helper/helpers';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -33,40 +33,56 @@ function showNotification(message: string) {
 function Display() {
     const searchParams = useSearchParams();
     const [img, setImg] = useState<string>('');
-    const [bankInfo, setBankInfo] = useState<IBank>();
     const money = searchParams.get('money');
     const content = searchParams.get('content');
     const bank = searchParams.get('bank');
     const [_, copyToClipboard] = useCopyToClipboard();
     useEffect(() => {
-        const money = searchParams.get('money');
-        const content = searchParams.get('content');
-        const bank = searchParams.get('bank');
-        // document.title = `QRCode ${money} đ`;
-        const myBank = MY_BANKS.find((item) => item.id === bank);
-        if (!myBank) return;
-        const BANK = LIST_BANK.find((item) => item.id === myBank.bank_id);
-        setBankInfo(BANK);
-        const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
-        const raw = JSON.stringify({
-            acqId: BANK?.bin,
-            accountName: 'LUONG QUANG TRONG',
-            accountNo: myBank.value,
-            amount: money,
-            addInfo: content,
-            template: 'qr_only',
-        });
+        const fetchData = () => {
+            const money = searchParams.get('money');
+            const content = searchParams.get('content');
+            const bank = searchParams.get('bank');
+            // document.title = `QRCode ${money} đ`;
+            const myBank = MY_BANKS.find((item) => item.id === bank);
+            if (!myBank) return;
+            const BANK = LIST_BANK.find((item) => item.id === myBank.bank_id);
+            const myHeaders = new Headers();
+            myHeaders.append('Content-Type', 'application/json');
+            const raw = JSON.stringify({
+                acqId: BANK?.bin,
+                accountName: 'LUONG QUANG TRONG',
+                accountNo: myBank.value,
+                amount: money,
+                addInfo: content,
+                template: 'qr_only',
+            });
 
-        fetch('https://api.vietqr.io/v2/generate', {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow',
-        })
-            .then((response) => response.json())
-            .then((result) => setImg(result.data.qrDataURL))
-            .catch((error) => console.error(error));
+            fetch('https://api.vietqr.io/v2/generate', {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow',
+            })
+                .then((response) => response.json())
+                .then((result) => setImg(result.data.qrDataURL))
+                .catch((error) => console.error(error));
+        };
+        const setMeta = () => {
+            const money = searchParams.get('money');
+            const content = searchParams.get('content');
+            document.title = `QR thanh toán tiền cho Quang Trọng`;
+            const metaDescription = document.querySelector('meta[name="description"]');
+            if (metaDescription) {
+                let contentString = 'QR thanh toán';
+                if (money) contentString += ` ${to_vietnam_dong(money)}₫ bằng chữ ${to_vietnam_dong(money)}`;
+                else contentString += ' hoá đơn';
+                if (content) contentString += `, Nội dung chuyển khoản ${content}`;
+                metaDescription.setAttribute('content', contentString);
+            }
+        };
+
+        setMeta();
+        fetchData();
 
         return () => {};
     }, [searchParams]);

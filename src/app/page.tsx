@@ -3,6 +3,7 @@
 
 import { BankTypes, LIST_BANK, MY_BANKS } from '@/helper/const';
 import { stringToSlug, to_vietnam_dong } from '@/helper/helpers';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -175,13 +176,15 @@ export default function Home() {
                                             setIsShowBank(false);
                                         }}
                                     >
-                                        <div className="font-semibold text-lg flex gap-2">
+                                        <div className="font-semibold text-lg flex gap-2 justify-between">
                                             <div className="w-auto h-8 flex items-center">{bank.label}</div>
                                             <div className="w-auto h-8">
-                                                <img
+                                                <Image
                                                     className="h-full object-contain"
                                                     src={LIST_BANK.find((b) => bank.bank_id === b.id)?.logo ?? ''}
                                                     alt="bank-logo"
+                                                    width={96}
+                                                    height={32}
                                                 />
                                             </div>
                                         </div>
