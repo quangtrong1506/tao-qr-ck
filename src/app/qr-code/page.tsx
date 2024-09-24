@@ -8,7 +8,9 @@ type Props = {
     params: { id: string };
     searchParams: { [key: string]: string | string[] | undefined };
 };
-
+export const metadata: Metadata = {
+    icons: '/images/qr-code.ico',
+};
 export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
     const { m, c, b } = searchParams;
     const myBank = MY_BANKS.find((item) => item.id === b);
@@ -34,9 +36,9 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
         return {
             title,
             description: descriptionContent,
-            icons: ['https://qr-nhantien.vercel.app/images/qr-code.ico', '/images/qr-code.ico'],
+            icons: ['/images/qr-code.ico', 'https://qr-nhantien.vercel.app/images/qr-code.ico'],
             openGraph: {
-                images: ['https://qr-nhantien.vercel.app/images/qr-code.ico', '/images/qr-code.ico'],
+                images: ['/images/qr-code.ico', 'https://qr-nhantien.vercel.app/images/qr-code.ico'],
             },
         };
     } catch (error) {
