@@ -18,7 +18,7 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
     }
 
     try {
-        const previousImages = ['/images/qr-code.png'];
+        const previousImages = ['/images/qr-code.ico'];
         const title = `QR thanh toán tiền cho Quang Trọng`;
         let descriptionContent = 'QR thanh toán';
 
@@ -32,12 +32,11 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
         if (content) {
             descriptionContent += `, Nội dung chuyển khoản ${content}`;
         }
-
         return {
             title,
             description: descriptionContent,
             openGraph: {
-                images: ['/some-specific-page-image.jpg', ...previousImages],
+                images: [...previousImages],
             },
         };
     } catch (error) {
