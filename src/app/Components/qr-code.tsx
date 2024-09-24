@@ -107,7 +107,7 @@ function QRCode() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="relative">
+                                <div className="relative flex justify-center items-center">
                                     <Image src={img} width={300} height={300} alt="..." />
                                 </div>
                                 <div className="px-1">

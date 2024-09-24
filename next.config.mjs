@@ -5,7 +5,7 @@ const nextConfig = {
         apiKey: '87deb95d-b4fe-4d63-858d-0a6a7aa90cd2',
     },
     images: {
-        domains: ['api.vietqr.io'],
+        domains: ['api.vietqr.io', 'https://qr-nhantien.vercel.app'],
     },
 };
 
