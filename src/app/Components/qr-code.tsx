@@ -33,15 +33,15 @@ function showNotification(message: string) {
 function QRCode() {
     const searchParams = useSearchParams();
     const [img, setImg] = useState<string>('');
-    const money = searchParams.get('money');
-    const content = searchParams.get('content');
-    const bank = searchParams.get('bank');
+    const money = searchParams.get('m');
+    const content = searchParams.get('c');
+    const bank = searchParams.get('b');
     const [_, copyToClipboard] = useCopyToClipboard();
     useEffect(() => {
         const fetchData = () => {
-            const money = searchParams.get('money');
-            const content = searchParams.get('content');
-            const bank = searchParams.get('bank');
+            const money = searchParams.get('m');
+            const content = searchParams.get('c');
+            const bank = searchParams.get('b');
             // document.title = `QRCode ${money} đ`;
             const myBank = MY_BANKS.find((item) => item.id === bank);
             if (!myBank) return;
@@ -112,17 +112,17 @@ function QRCode() {
                                 </div>
                                 <div className="px-1">
                                     <div className="w-full flex flex-col justify-center items-center">
-                                        {content && (
-                                            <>
-                                                <div className="font-semibold text-lg">Nội dung</div>
-                                                <div> {content}</div>
-                                            </>
-                                        )}
                                         {money && (
                                             <>
                                                 <div className="font-semibold text-lg">Số tiền</div>
                                                 <div>{new Intl.NumberFormat('vi-VN').format(parseInt(money))}</div>
                                                 <div className="capitalize">{to_vietnam_dong(money)}</div>
+                                            </>
+                                        )}
+                                        {content && (
+                                            <>
+                                                <div className="font-semibold text-lg">Nội dung</div>
+                                                <div> {content}</div>
                                             </>
                                         )}
                                     </div>

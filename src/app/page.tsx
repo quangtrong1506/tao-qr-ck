@@ -25,7 +25,7 @@ export default function Home() {
     };
     const handleSubmit = () => {
         setIsLoading(true);
-        router.push(`/qr-code?money=${money.replaceAll('.', '')}&content=${content}&bank=${bank?.id}`);
+        router.push(`/qr-code?m=${money.replaceAll('.', '')}&c=${content}&b=${bank?.id}`);
     };
     useEffect(() => {
         setBank(MY_BANKS[0]);

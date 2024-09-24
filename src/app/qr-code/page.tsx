@@ -10,8 +10,8 @@ type Props = {
 };
 
 export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-    const { money, content, bank } = searchParams;
-    const myBank = MY_BANKS.find((item) => item.id === bank);
+    const { m, c, b } = searchParams;
+    const myBank = MY_BANKS.find((item) => item.id === b);
 
     if (!myBank) {
         return { title: '404', description: 'Page not found' };
@@ -21,15 +21,15 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
         const title = `QR thanh toán tiền cho Quang Trọng`;
         let descriptionContent = 'QR thanh toán';
 
-        if (money) {
-            const formattedMoney = to_vietnam_dong(money as string);
+        if (m) {
+            const formattedMoney = to_vietnam_dong(m as string);
             descriptionContent += ` ${formattedMoney}₫ bằng chữ ${formattedMoney}`;
         } else {
             descriptionContent += ' hoá đơn';
         }
 
-        if (content) {
-            descriptionContent += `, Nội dung chuyển khoản ${content}`;
+        if (c) {
+            descriptionContent += `, Nội dung chuyển khoản ${c}`;
         }
         return {
             title,
