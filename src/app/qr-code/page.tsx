@@ -18,7 +18,6 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
     }
 
     try {
-        const previousImages = ['/images/qr-code.ico'];
         const title = `QR thanh toán tiền cho Quang Trọng`;
         let descriptionContent = 'QR thanh toán';
 
@@ -36,8 +35,9 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
             title,
             description: descriptionContent,
             openGraph: {
-                images: [...previousImages],
+                images: '/images/qr-code.ico',
             },
+            icons: '/images/qr-code.ico',
         };
     } catch (error) {
         console.error('Error fetching QR code data:', error);
