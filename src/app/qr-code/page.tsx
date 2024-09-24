@@ -23,18 +23,21 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 
         if (m) {
             const formattedMoney = to_vietnam_dong(m as string);
-            descriptionContent += ` ${formattedMoney}₫ bằng chữ ${formattedMoney}`;
+            descriptionContent += ` ${parseInt(m as string, 10).toLocaleString('vi-VN')}₫ bằng chữ ${formattedMoney}`;
         } else {
             descriptionContent += ' hoá đơn';
         }
 
         if (c) {
-            descriptionContent += `, Nội dung chuyển khoản ${c}`;
+            descriptionContent += `, Nội dung chuyển khoản: "${c}"`;
         }
         return {
             title,
             description: descriptionContent,
             icons: '/images/qr-code.ico',
+            openGraph: {
+                images: ['/images/qr-code.ico'],
+            },
         };
     } catch (error) {
         console.error('Error fetching QR code data:', error);
