@@ -34,9 +34,6 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
         return {
             title,
             description: descriptionContent,
-            openGraph: {
-                images: '/images/qr-code.ico',
-            },
             icons: '/images/qr-code.ico',
         };
     } catch (error) {
