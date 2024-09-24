@@ -34,9 +34,9 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
         return {
             title,
             description: descriptionContent,
-            icons: 'https://qr-nhantien.vercel.app/images/qr-code.ico',
+            icons: ['https://qr-nhantien.vercel.app/images/qr-code.ico', '/images/qr-code.ico'],
             openGraph: {
-                images: ['https://qr-nhantien.vercel.app/images/qr-code.ico'],
+                images: ['https://qr-nhantien.vercel.app/images/qr-code.ico', '/images/qr-code.ico'],
             },
         };
     } catch (error) {
